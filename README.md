@@ -2,7 +2,7 @@
 
 Frontend. The Web-app is adaptated for the internal TG browser.
 
-The pet project. The telegram bot @ovechnost_bot ( link: https://t.me/ovechnost_bot ).
+The telegram bot @ovechnost_bot ( link: https://t.me/ovechnost_bot ).
 
 # Stack
 
