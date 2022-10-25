@@ -1,0 +1,13 @@
+.button {
+  color: var(--tg-theme-button-text-color);
+  background: var(--tg-theme-button-color);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
