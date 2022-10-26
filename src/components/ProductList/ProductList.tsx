@@ -94,7 +94,6 @@ const ProductList: FC = () => {
         await fetch(`${SERVER}/products/`, {
           method: "GET",
           headers: {
-            // Accept: "application/json",
             "Content-Type": "application/json",
           },
         })
@@ -121,7 +120,7 @@ const ProductList: FC = () => {
     cart.map((el) => (priceTotal += +el.newPrice));
 
     tg.MainButton.setParams({
-      text: `Сумма заказа: ${priceTotal}р.`,
+      text: `Перейти в корзину (${priceTotal}р.)`,
     });
 
     if (cart.length !== 0 && !tg.MainButton.isVisible) {
@@ -132,6 +131,17 @@ const ProductList: FC = () => {
       tg.MainButton.hide();
     }
   }, [cart]);
+
+  const cb = () => {
+    tg.sendData("hello");
+  };
+
+  useEffect(() => {
+    tg.onEvent("mainButtonClicked", cb);
+    return () => {
+      tg.offEvent("mainButtonClicked", cb);
+    };
+  }, []);
 
   const addToCart = useCallback(
     (product: any) => {

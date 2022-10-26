@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../../UI/Button/Button";
+import { LANGUAGE } from "../../../../const/const";
 
 import styles from "./ProductItem.module.scss";
 
@@ -7,16 +8,16 @@ const ProductItem: FC<any> = (props) => {
   const { product, onAdd } = props;
   let { title, material, oldPrice, newPrice, colors, sizes } = product;
 
-  const isDiscount = Boolean(oldPrice !== newPrice);
-  const discountAmount = Math.round(((oldPrice - newPrice) / oldPrice) * 100);
-
   const [choosenSize, setChoosenSize] = useState("");
-  const sizesStylesObj = useRef<any>(null);
-  const keepTimeout = useRef<any>(null);
-  const [requiredField, setRequiredField] = useState("");
+  const [requiredAlert, setRequiredAlert] = useState("");
   const [btnEffectOnClick, setBtnEffectOnClick] = useState("");
+  const keepSizesStyles = useRef<any>(null);
+  const keepTimeout = useRef<any>(null);
 
   const isChoosen = Boolean(choosenSize !== "");
+  const isDiscount = Boolean(oldPrice !== newPrice);
+
+  const discountAmount = Math.round(((oldPrice - newPrice) / oldPrice) * 100);
 
   // First letter toUpperCase
   const re = /^.(.*)/gm;
@@ -25,6 +26,15 @@ const ProductItem: FC<any> = (props) => {
   // Split string - product materials, sizes
   material = material.split(", ");
   sizes = sizes.toUpperCase().split(", ");
+
+  const clearSizesStyles = useCallback(() => {
+    const tempObj: { [key: string]: string } = {};
+    for (let i = 0; i < sizes.length; i++) {
+      const size = sizes[i].toString();
+      tempObj[size] = "";
+    }
+    keepSizesStyles.current = { ...tempObj };
+  }, []);
 
   useEffect(() => {
     clearSizesStyles();
@@ -36,31 +46,26 @@ const ProductItem: FC<any> = (props) => {
   }, []);
 
   const sizeStyle = useCallback((el: string) => {
-    if (sizesStylesObj.current) {
-      return sizesStylesObj.current[el];
+    if (keepSizesStyles.current) {
+      return keepSizesStyles.current[el];
     }
     return "";
-  }, []);
-
-  const clearSizesStyles = useCallback(() => {
-    const tempObj: any = {};
-    for (let i = 0; i < sizes.length; i++) {
-      tempObj[sizes[i].toString()] = "";
-    }
-    sizesStylesObj.current = { ...tempObj };
   }, []);
 
   const onChooseSize = useCallback(
     (size: string) => {
       if (choosenSize === size) {
         setChoosenSize("");
-        sizesStylesObj.current[size] = "";
+        keepSizesStyles.current[size] = "";
       } else {
-        setChoosenSize(size);
-        setRequiredField("");
-        clearSizesStyles();
+        // Remove set styles
         clearTimeout(keepTimeout.current);
-        sizesStylesObj.current[size] = styles.productItem__size__value_active;
+        setRequiredAlert("");
+
+        setChoosenSize(size);
+        // Set new styles
+        clearSizesStyles();
+        keepSizesStyles.current[size] = styles.productItem__size__value_active;
       }
     },
     [isChoosen, choosenSize]
@@ -68,15 +73,19 @@ const ProductItem: FC<any> = (props) => {
 
   const addToCart = useCallback(() => {
     if (!isChoosen) {
-      setRequiredField(styles.requiredField);
+      // Show styled notification
+      setRequiredAlert(styles.requiredAlert);
+      // Remove it in 3s
       clearTimeout(keepTimeout.current);
       keepTimeout.current = setTimeout(() => {
-        setRequiredField("");
+        setRequiredAlert("");
       }, 3000);
     } else {
       setChoosenSize("");
       clearSizesStyles();
+      // Cb from parent
       onAdd(product);
+      // Button effect on click
       setBtnEffectOnClick(styles.btnClick);
       clearTimeout(keepTimeout.current);
       keepTimeout.current = setTimeout(() => {
@@ -90,7 +99,9 @@ const ProductItem: FC<any> = (props) => {
       <div className={styles.productItem__img}>
         {isDiscount && (
           <div className={styles.productItem__img__note}>
-            <span>скидка {discountAmount}%!</span>
+            <span>
+              {LANGUAGE.RU.DISCOUNT}&nbsp;{discountAmount}%!
+            </span>
           </div>
         )}
         <img src="" alt="product.webp" />
@@ -109,22 +120,34 @@ const ProductItem: FC<any> = (props) => {
           })}
         </p>
       </div>
+
       <div className={styles.productItem__price}>
         {isDiscount && (
           <>
             <span className={styles.productItem__price_new}>
-              <strong>&nbsp;{newPrice}р.&nbsp;</strong>
+              <strong>
+                &nbsp;{newPrice}
+                {LANGUAGE.RU.CURRENCY}&nbsp;
+              </strong>
             </span>
-            <span className={styles.productItem__price_old}>{oldPrice}р.</span>
+            <span className={styles.productItem__price_old}>
+              {oldPrice}
+              {LANGUAGE.RU.CURRENCY}
+            </span>
           </>
         )}
         {!isDiscount && (
           <span className={styles.productItem__price_usual}>
-            <strong>{oldPrice}р.</strong>
+            <strong>
+              {oldPrice}
+              {LANGUAGE.RU.CURRENCY}
+            </strong>
           </span>
         )}
       </div>
+
       <div className={styles.productItem__color}></div>
+
       <div className={styles.productItem__size}>
         {sizes.map((el: string) => {
           return (
@@ -133,13 +156,14 @@ const ProductItem: FC<any> = (props) => {
               key={el}
               onClick={() => onChooseSize(el)}
             >
-              <span className={sizeStyle(el) + " " + requiredField}>
+              <span className={sizeStyle(el) + " " + requiredAlert}>
                 <strong>{el}</strong>
               </span>
             </div>
           );
         })}
       </div>
+
       <div className={styles.btnWrapper}>
         <div
           className={
@@ -150,7 +174,7 @@ const ProductItem: FC<any> = (props) => {
           className={styles.productItem__addToCartBtn}
           onClick={addToCart}
         >
-          <strong>В корзину2</strong>
+          <strong>{LANGUAGE.RU.ADDTOCART}</strong>
         </Button>
       </div>
     </div>
