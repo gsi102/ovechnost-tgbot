@@ -1,0 +1,46 @@
+.checkout__order__item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px 0;
+
+  hr {
+    border: none;
+    border-top: 1px dotted rgb(130, 118, 106, 0.9);
+    height: 1px;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  & > * {
+    padding: 10px 0;
+  }
+}
+
+.checkout__order__item_color {
+  color: rgb(130, 118, 106, 0.9);
+}
+
+.checkout__order__item_price_new {
+  padding: 0 10px;
+}
+
+.checkout__order__item_price_old {
+  text-decoration: line-through;
+}
+
+.checkout__order__item_price_discount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-style: italic;
+  color: rgb(130, 118, 106, 0.6);
+}
+
+.checkout__order__item__deleteBtn {
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: 1px solid rgb(231, 56, 39, 0.7);
+  color: rgb(231, 56, 39, 0.7);
+}

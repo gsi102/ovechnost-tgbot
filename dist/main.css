@@ -18,8 +18,8 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
-  src: url(/assets/fonts/Roboto.e0f8e9906dc405445f93..eot); /* IE9 Compat Modes */
-  src: local(""), url(/assets/fonts/Roboto.e0f8e9906dc405445f93..eot) format("embedded-opentype"), url(/assets/fonts/Roboto.7a6a74946c133ee71f79..woff2) format("woff2"), url(/assets/fonts/Roboto.1c9c3df25d1a9861f401..woff) format("woff"), url(/assets/fonts/Roboto.d847b43d0d1e5ae3e348..ttf) format("truetype"), url(/assets/fonts/Roboto.c1b45526c01059c5ac0e..svg) format("svg"); /* Legacy iOS */
+  src: url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot); /* IE9 Compat Modes */
+  src: local(""), url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot) format("embedded-opentype"), url(/assets/fonts/Roboto.7a6a74946c133ee71f79.woff2) format("woff2"), url(/assets/fonts/Roboto.1c9c3df25d1a9861f401.woff) format("woff"), url(/assets/fonts/Roboto.d847b43d0d1e5ae3e348.ttf) format("truetype"), url(/assets/fonts/Roboto.c1b45526c01059c5ac0e.svg) format("svg"); /* Legacy iOS */
 }
 * {
   font-family: "Roboto";
@@ -42,11 +42,29 @@ html {
   background: white;
 }
 
+input[type=color],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select:focus,
+textarea {
+  font-size: 16px;
+}
+
 ._p8A130mYfHuNAUhwjY5 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr auto 40px auto auto 40px;
-  grid-auto-rows: minmax(1rem auto);
   row-gap: 10px;
   padding: 10px;
   border-radius: 20px;
@@ -75,7 +93,7 @@ html {
   border-radius: 20px;
   max-width: 100%;
   max-height: 100%;
-  content: url(/assets/img/product.909f775dd8cb1701f2f3..jpg);
+  content: url(/assets/img/product.909f775dd8cb1701f2f3.jpg);
 }
 
 .yY4llFG3TyiOErZPX1BB {
@@ -182,10 +200,15 @@ html {
   opacity: 1;
 }
 
-.rkHQ_Z_gdEUfLmWiEMt5.E50J6g5nxGEwhwYxNKpC {
-  height: calc(100% + 20px);
-  transform: translateY(-10px) scale(1.1);
+.E50J6g5nxGEwhwYxNKpC > .rkHQ_Z_gdEUfLmWiEMt5 {
+  height: calc(100% + 10px);
+  transform: translateY(-5px) scale(1.06);
   opacity: 0;
+  transition: all 0.3s linear;
+}
+
+.E50J6g5nxGEwhwYxNKpC > .dDT9eU72uQ8BfoP5EKUD {
+  transform: scale(0.975);
   transition: all 0.3s linear;
 }
 
@@ -195,32 +218,12 @@ html {
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/ProductList/ProductList.module.scss ***!
   \********************************************************************************************************************************************************************************************************************/
-.I15iaRE3amIKzNhGwxj6 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 10px;
-  column-gap: 10px;
-  padding: 10px;
-}
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/MainComponent/MainComponent.module.scss ***!
-  \************************************************************************************************************************************************************************************************************************/
-
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/UI/Input/Input.module.scss ***!
-  \***********************************************************************************************************************************************************************************************************/
-.qIxXL6mWhk2c0MXZy4xq {
-  padding: 4px 6px;
-}
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/mainStyles.module.scss ***!
-  \***************************************************************************************************************************************************************************************************/
 @font-face {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
-  src: url(/assets/fonts/Roboto.e0f8e9906dc405445f93..eot); /* IE9 Compat Modes */
-  src: local(""), url(/assets/fonts/Roboto.e0f8e9906dc405445f93..eot) format("embedded-opentype"), url(/assets/fonts/Roboto.7a6a74946c133ee71f79..woff2) format("woff2"), url(/assets/fonts/Roboto.1c9c3df25d1a9861f401..woff) format("woff"), url(/assets/fonts/Roboto.d847b43d0d1e5ae3e348..ttf) format("truetype"), url(/assets/fonts/Roboto.c1b45526c01059c5ac0e..svg) format("svg"); /* Legacy iOS */
+  src: url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot); /* IE9 Compat Modes */
+  src: local(""), url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot) format("embedded-opentype"), url(/assets/fonts/Roboto.7a6a74946c133ee71f79.woff2) format("woff2"), url(/assets/fonts/Roboto.1c9c3df25d1a9861f401.woff) format("woff"), url(/assets/fonts/Roboto.d847b43d0d1e5ae3e348.ttf) format("truetype"), url(/assets/fonts/Roboto.c1b45526c01059c5ac0e.svg) format("svg"); /* Legacy iOS */
 }
 * {
   font-family: "Roboto";
@@ -241,4 +244,320 @@ html {
   background: var(--tg-theme-bg-color);
   color: black;
   background: white;
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select:focus,
+textarea {
+  font-size: 16px;
+}
+
+.I15iaRE3amIKzNhGwxj6 {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  padding: 10px;
+}
+
+.qRSbI_dGOQx79yIz8o9z,
+.EpCXiChlrMawgUYZXMgj {
+  display: grid;
+  row-gap: 10px;
+  grid-auto-rows: minmax(min-content, max-content);
+}
+
+.EpCXiChlrMawgUYZXMgj {
+  transform: translateY(160px);
+}
+
+.iZDc4K2KfQ8Xa41ETsoA {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: calc(50% - 20px);
+  right: 10px;
+  top: 10px;
+  border-radius: 20px;
+  -webkit-box-shadow: 1px 1px 10px rgba(130, 118, 106, 0.2); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 1px 10px rgba(130, 118, 106, 0.2); /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 1px 10px rgba(130, 118, 106, 0.2);
+  background-color: rgba(205, 143, 106, 0.1);
+}
+
+.slVwCUkY2UnafDyCtBgr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: rgb(147, 100, 72);
+}
+.slVwCUkY2UnafDyCtBgr > * {
+  padding: 5px 0;
+}
+
+.MV8xKsHYEpBHydkuSQ8t {
+  position: relative;
+  background: white;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+}
+.MV8xKsHYEpBHydkuSQ8t > img {
+  position: absolute;
+  padding: 5px;
+  transform: translateX(-50%);
+  width: 90%;
+  content: url(/assets/img/delivery.7d4a09d0c7613ab2d653.webp);
+}
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/MainComponent/MainComponent.module.scss ***!
+  \************************************************************************************************************************************************************************************************************************/
+
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/UI/Input/Input.module.scss ***!
+  \***********************************************************************************************************************************************************************************************************/
+.qIxXL6mWhk2c0MXZy4xq {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+}
+.qIxXL6mWhk2c0MXZy4xq:focus {
+  outline: none;
+}
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/Form/Form.module.scss ***!
+  \******************************************************************************************************************************************************************************************************/
+.Nl9sbryPciNiTffJgBG2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+}
+.Nl9sbryPciNiTffJgBG2 > * {
+  margin: 10px 0;
+}
+
+.ndriXSOALSGV1yx732TK {
+  -webkit-appearance: none;
+  -webkit-box-shadow: 1px 1px 10px rgba(130, 118, 106, 0.2); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 1px 10px rgba(130, 118, 106, 0.2); /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 1px 10px rgba(130, 118, 106, 0.2);
+  transition: all 0.3s linear;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+}
+.ndriXSOALSGV1yx732TK::placeholder {
+  color: rgba(130, 118, 106, 0.5);
+}
+.ndriXSOALSGV1yx732TK:focus {
+  -webkit-appearance: none;
+  -webkit-box-shadow: 1px 1px 5px rgb(130, 118, 106); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 1px 5px rgb(130, 118, 106); /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 1px 5px rgb(130, 118, 106);
+  outline: none;
+}
+
+.xyNnj9X3ulF0DEULnhZC {
+  width: fit-content;
+  height: 100%;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 20px;
+  background: rgb(0, 166, 81);
+  color: white;
+}
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/Checkout/components/ItemInCart/ItemInCart.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+.s50BqS2vDjpeBaSFSclW {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px 0;
+}
+.s50BqS2vDjpeBaSFSclW hr {
+  border: none;
+  border-top: 1px dotted rgba(130, 118, 106, 0.9);
+  height: 1px;
+  width: 100%;
+  margin: 10px 0;
+}
+.s50BqS2vDjpeBaSFSclW > * {
+  padding: 10px 0;
+}
+
+.HkFw2UXXrkxBLVdPAAra {
+  color: rgba(130, 118, 106, 0.9);
+}
+
+.iJZMeM9Yfd6xf2d7vWBr {
+  padding: 0 10px;
+}
+
+.H8VGQf4sdv22dfJj66wu {
+  text-decoration: line-through;
+}
+
+.DbrtJTAYApQNutMJXGau {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-style: italic;
+  color: rgba(130, 118, 106, 0.6);
+}
+
+.toL5wQL75yHLv_caWp_q {
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: 1px solid rgba(231, 56, 39, 0.7);
+  color: rgba(231, 56, 39, 0.7);
+}
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/Checkout/Checkout.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************/
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot); /* IE9 Compat Modes */
+  src: local(""), url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot) format("embedded-opentype"), url(/assets/fonts/Roboto.7a6a74946c133ee71f79.woff2) format("woff2"), url(/assets/fonts/Roboto.1c9c3df25d1a9861f401.woff) format("woff"), url(/assets/fonts/Roboto.d847b43d0d1e5ae3e348.ttf) format("truetype"), url(/assets/fonts/Roboto.c1b45526c01059c5ac0e.svg) format("svg"); /* Legacy iOS */
+}
+* {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*:before, *:after {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  color: var(--tg-theme-text-color);
+  background: var(--tg-theme-bg-color);
+  color: black;
+  background: white;
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select:focus,
+textarea {
+  font-size: 16px;
+}
+
+.N3sKd4CpOmqaISxngt1k {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 50vh;
+}
+.N3sKd4CpOmqaISxngt1k h3 {
+  padding: 10px 0;
+}
+
+.mrtVCyY2G7YvRjO1HVwv {
+  padding: 0 0 10px 0;
+  text-align: center;
+}
+
+.cS0dL2fHzMsYTG7PNBHh {
+  width: 100%;
+}
+
+.TEEhicoWPEy5zxBFzSSZ {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/mainStyles.module.scss ***!
+  \***************************************************************************************************************************************************************************************************/
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot); /* IE9 Compat Modes */
+  src: local(""), url(/assets/fonts/Roboto.e0f8e9906dc405445f93.eot) format("embedded-opentype"), url(/assets/fonts/Roboto.7a6a74946c133ee71f79.woff2) format("woff2"), url(/assets/fonts/Roboto.1c9c3df25d1a9861f401.woff) format("woff"), url(/assets/fonts/Roboto.d847b43d0d1e5ae3e348.ttf) format("truetype"), url(/assets/fonts/Roboto.c1b45526c01059c5ac0e.svg) format("svg"); /* Legacy iOS */
+}
+* {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*:before, *:after {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  color: var(--tg-theme-text-color);
+  background: var(--tg-theme-bg-color);
+  color: black;
+  background: white;
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select:focus,
+textarea {
+  font-size: 16px;
 }

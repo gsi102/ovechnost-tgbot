@@ -11754,6 +11754,11 @@ tcp-port-used@^1.0.2:
     debug "4.3.1"
     is2 "^2.0.6"
 
+telegram-typings@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/telegram-typings/-/telegram-typings-5.0.0.tgz#a5ab8aeb4115b60a6ff02ad66b02b33181fc07cf"
+  integrity sha512-3xmQ9D87wEdMYUgzTekEP4hEPJz9lIW0tnumrbkH1Tfwt5e7ZMy5ZiUpGnjnQOpZTItrdeEeavRGLRvXepO35w==
+
 temp-dir@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-2.0.0.tgz#bde92b05bdfeb1516e804c9c00ad45177f31321e"

@@ -5,9 +5,10 @@ $rowsCount: 1fr auto 40px auto auto 40px;
 
 .productItem {
   display: grid;
+  // height: 100%;
   grid-template-columns: $columnsCount;
   grid-template-rows: $rowsCount;
-  grid-auto-rows: minmax(1rem auto);
+  // grid-auto-rows: minmax(1rem, auto);
   row-gap: 10px;
   padding: 10px;
   border-radius: 20px;
@@ -173,10 +174,15 @@ $rowsCount: 1fr auto 40px auto auto 40px;
   opacity: 1;
 }
 
-.productItem__addToCartBtn_effect.btnClick {
-  height: calc(100% + 20px);
-  transform: translateY(-10px) scale(1.1);
+.btnClick > .productItem__addToCartBtn_effect {
+  height: calc(100% + 10px);
+  transform: translateY(-5px) scale(1.06);
   opacity: 0;
+  transition: all 0.3s linear;
+}
+
+.btnClick > .productItem__addToCartBtn {
+  transform: scale(0.975);
   transition: all 0.3s linear;
 }
 

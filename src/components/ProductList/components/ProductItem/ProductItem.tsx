@@ -84,7 +84,17 @@ const ProductItem: FC<any> = (props) => {
       setChoosenSize("");
       clearSizesStyles();
       // Cb from parent
-      onAdd(product);
+      const addVariant = {
+        id: `${product.sku}-${choosenSize}`,
+        title: product.title,
+        sku: product.sku,
+        size: choosenSize,
+        oldPrice,
+        newPrice,
+        discount: discountAmount,
+        quantity: 1,
+      };
+      onAdd(addVariant);
       // Button effect on click
       setBtnEffectOnClick(styles.btnClick);
       clearTimeout(keepTimeout.current);
@@ -94,91 +104,92 @@ const ProductItem: FC<any> = (props) => {
     }
   }, [product, choosenSize]);
 
-  return (
-    <div className={styles.productItem}>
-      <div className={styles.productItem__img}>
-        {isDiscount && (
-          <div className={styles.productItem__img__note}>
-            <span>
-              {LANGUAGE.RU.DISCOUNT}&nbsp;{discountAmount}%!
-            </span>
-          </div>
-        )}
-        <img src="" alt="product.webp" />
-      </div>
-
-      <div className={styles.productItem__name}>
-        <p>{title}</p>
-        <p className={styles.productItem__name_hint}>
-          {material.map((el: string) => {
-            return (
-              <span key={el}>
-                <span>{el}</span>
-                <br />
-              </span>
-            );
-          })}
-        </p>
-      </div>
-
-      <div className={styles.productItem__price}>
-        {isDiscount && (
-          <>
-            <span className={styles.productItem__price_new}>
-              <strong>
-                &nbsp;{newPrice}
-                {LANGUAGE.RU.CURRENCY}&nbsp;
-              </strong>
-            </span>
-            <span className={styles.productItem__price_old}>
-              {oldPrice}
-              {LANGUAGE.RU.CURRENCY}
-            </span>
-          </>
-        )}
-        {!isDiscount && (
-          <span className={styles.productItem__price_usual}>
-            <strong>
-              {oldPrice}
-              {LANGUAGE.RU.CURRENCY}
-            </strong>
-          </span>
-        )}
-      </div>
-
-      <div className={styles.productItem__color}></div>
-
-      <div className={styles.productItem__size}>
-        {sizes.map((el: string) => {
-          return (
-            <div
-              className={styles.productItem__size__value}
-              key={el}
-              onClick={() => onChooseSize(el)}
-            >
-              <span className={sizeStyle(el) + " " + requiredAlert}>
-                <strong>{el}</strong>
+  const id = product._id;
+  if (id === "delivery") {
+    return <div className={styles.productItem}></div>;
+  } else {
+    return (
+      <div className={styles.productItem}>
+        <div className={styles.productItem__img}>
+          {isDiscount && (
+            <div className={styles.productItem__img__note}>
+              <span>
+                {LANGUAGE.RU.DISCOUNT}&nbsp;{discountAmount}%!
               </span>
             </div>
-          );
-        })}
-      </div>
+          )}
+          <img src="" alt="product.webp" />
+        </div>
 
-      <div className={styles.btnWrapper}>
-        <div
-          className={
-            styles.productItem__addToCartBtn_effect + " " + btnEffectOnClick
-          }
-        />
-        <Button
-          className={styles.productItem__addToCartBtn}
-          onClick={addToCart}
-        >
-          <strong>{LANGUAGE.RU.ADDTOCART}</strong>
-        </Button>
+        <div className={styles.productItem__name}>
+          <p>{title}</p>
+          <p className={styles.productItem__name_hint}>
+            {material.map((el: string) => {
+              return (
+                <span key={el}>
+                  <span>{el}</span>
+                  <br />
+                </span>
+              );
+            })}
+          </p>
+        </div>
+
+        <div className={styles.productItem__price}>
+          {isDiscount && (
+            <>
+              <span className={styles.productItem__price_new}>
+                <strong>
+                  &nbsp;{newPrice}
+                  {LANGUAGE.RU.CURRENCY}&nbsp;
+                </strong>
+              </span>
+              <span className={styles.productItem__price_old}>
+                {oldPrice}
+                {LANGUAGE.RU.CURRENCY}
+              </span>
+            </>
+          )}
+          {!isDiscount && (
+            <span className={styles.productItem__price_usual}>
+              <strong>
+                {oldPrice}
+                {LANGUAGE.RU.CURRENCY}
+              </strong>
+            </span>
+          )}
+        </div>
+
+        <div className={styles.productItem__color}></div>
+
+        <div className={styles.productItem__size}>
+          {sizes.map((el: string) => {
+            return (
+              <div
+                className={styles.productItem__size__value}
+                key={el}
+                onClick={() => onChooseSize(el)}
+              >
+                <span className={sizeStyle(el) + " " + requiredAlert}>
+                  <strong>{el}</strong>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className={styles.btnWrapper + " " + btnEffectOnClick}>
+          <div className={styles.productItem__addToCartBtn_effect} />
+          <Button
+            className={styles.productItem__addToCartBtn}
+            onClick={addToCart}
+          >
+            <strong>{LANGUAGE.RU.ADDTOCART}</strong>
+          </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ProductItem;

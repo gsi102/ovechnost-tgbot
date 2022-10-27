@@ -1,10 +1,13 @@
-import React, { FC, SyntheticEvent, useState } from "react";
+import React, { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
+import { LANGUAGE } from "../../const/const";
 
 import styles from "./Form.module.scss";
 
 const Form: FC = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState();
   const [phone, setPhone] = useState();
   const onNameChange = (e: any) => {
@@ -15,18 +18,29 @@ const Form: FC = () => {
   };
 
   const onSubmit = () => {
-    console.log("submit!");
+    navigate("/success-page");
   };
 
   return (
-    <form>
-      <Input placeholder={"Имя"} value={name} onChange={onNameChange}></Input>
+    <form className={styles.form}>
+      <h3>{LANGUAGE.RU.LEAVE_YOUR_DATA}</h3>
       <Input
-        placeholder={"Телефон"}
+        type="text"
+        placeholder={LANGUAGE.RU.NAME}
+        value={name}
+        onChange={onNameChange}
+        className={styles.form__input}
+      />
+      <Input
+        type="text"
+        placeholder={LANGUAGE.RU.PHONE}
         value={phone}
         onChange={onPhoneChange}
-      ></Input>
-      <Button onClick={onSubmit}>Отправить заявку</Button>
+        className={styles.form__input}
+      />
+      <Button className={styles.form__submitBtn} onClick={onSubmit}>
+        <strong>{LANGUAGE.RU.SUBMIT_ORDER}</strong>
+      </Button>
     </form>
   );
 };

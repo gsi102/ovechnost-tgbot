@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV === "development";
 const isProd = !isDev;
 
 const fileName = (ext) =>
-  isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+  isDev ? `[name]${ext}` : `[name].[contenthash]${ext}`;
 
 module.exports = {
   mode: "development",
@@ -16,7 +16,7 @@ module.exports = {
   output: {
     publicPath: "/",
     path: resolve(__dirname, "dist"),
-    filename: fileName("js"),
+    filename: fileName(".js"),
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
