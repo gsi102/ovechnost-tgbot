@@ -9,29 +9,31 @@ import styles from "./Checkout.module.scss";
 const Checkout: FC = () => {
   const location = useLocation();
   let order = location?.state;
+  const [items, setItems] = useState([]);
 
-  // useEffect(() => {
-  //   let arr = [...order];
-  //   let filtered: any[] = [];
-  //   for (let i = 0; i < arr.length; i++) {
-  //     let index = i;
-  //     if (i === arr.length) {
-  //       filtered = [...filtered, arr[i]];
-  //       break;
-  //     }
-  //     for (let j = 1; j < arr.length; j++) {
-  //       if (arr[i].id === arr[j].id) {
-  //         arr[i].quantity++;
-  //         j++;
-  //         index++;
-  //       }
-  //     }
-  //     filtered = [...filtered, arr[i]];
-  //   }
-  //   console.log({ filtered });
-  // }, []);
+  const groupSimilar = useCallback((arr: any[]) => {
+    // let arr = [...order];
+    let filtered: any[] = [];
+    for (let i = 0; i < arr.length; i++) {
+      const current = { ...arr[i] };
+      for (let j = i + 1; j < arr.length; j++) {
+        const next = { ...arr[j] };
+        if (current.id === next.id) {
+          arr.splice(j, 1);
+          j--;
+          current.quantity++;
+        }
+      }
+      filtered = [...filtered, { ...current }];
+    }
+    return [...filtered];
+  }, []);
 
-  const [items, setItems] = useState(order);
+  useEffect(() => {
+    order = groupSimilar(order);
+    setItems(order);
+  }, []);
+
   const totalAmount = items.reduce(
     (previous: any, current: any) => +previous + +current.newPrice,
     0

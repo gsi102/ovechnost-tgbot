@@ -16,6 +16,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ItemInCart_ItemInCart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ItemInCart/ItemInCart */ "./src/components/Checkout/components/ItemInCart/ItemInCart.tsx");
 /* harmony import */ var _const_const__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../const/const */ "./src/const/const.ts");
 /* harmony import */ var _Checkout_module_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Checkout.module.scss */ "./src/components/Checkout/Checkout.module.scss");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -31,32 +38,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Checkout = function Checkout() {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
   var order = location === null || location === void 0 ? void 0 : location.state;
-
-  // useEffect(() => {
-  //   let arr = [...order];
-  //   let filtered: any[] = [];
-  //   for (let i = 0; i < arr.length; i++) {
-  //     let index = i;
-  //     if (i === arr.length) {
-  //       filtered = [...filtered, arr[i]];
-  //       break;
-  //     }
-  //     for (let j = 1; j < arr.length; j++) {
-  //       if (arr[i].id === arr[j].id) {
-  //         arr[i].quantity++;
-  //         j++;
-  //         index++;
-  //       }
-  //     }
-  //     filtered = [...filtered, arr[i]];
-  //   }
-  //   console.log({ filtered });
-  // }, []);
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(order),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     items = _useState2[0],
     setItems = _useState2[1];
+  var groupSimilar = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (arr) {
+    // let arr = [...order];
+    var filtered = [];
+    for (var i = 0; i < arr.length; i++) {
+      var current = _objectSpread({}, arr[i]);
+      for (var j = i + 1; j < arr.length; j++) {
+        var next = _objectSpread({}, arr[j]);
+        if (current.id === next.id) {
+          arr.splice(j, 1);
+          j--;
+          current.quantity++;
+        }
+      }
+      filtered = [].concat(_toConsumableArray(filtered), [_objectSpread({}, current)]);
+    }
+    return _toConsumableArray(filtered);
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    order = groupSimilar(order);
+    setItems(order);
+  }, []);
   var totalAmount = items.reduce(function (previous, current) {
     return +previous + +current.newPrice;
   }, 0);
@@ -116,7 +122,7 @@ var ItemInCart = function ItemInCart(props) {
     className: _ItemInCart_module_scss__WEBPACK_IMPORTED_MODULE_3__["default"].checkout__order__item
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h4", null, title, " - \u0440\u0430\u0437\u043C\u0435\u0440 ", size), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
     className: _ItemInCart_module_scss__WEBPACK_IMPORTED_MODULE_3__["default"].checkout__order__item_color
-  }, "\u0426\u0432\u0435\u0442: \u043A\u0430\u0440\u0430\u043C\u0435\u043B\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+  }, "\u0426\u0432\u0435\u0442: \u043A\u0430\u0440\u0430\u043C\u0435\u043B\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E: ", quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
     className: _ItemInCart_module_scss__WEBPACK_IMPORTED_MODULE_3__["default"].checkout__order__item_price
   }, isDiscount && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
     className: _ItemInCart_module_scss__WEBPACK_IMPORTED_MODULE_3__["default"].checkout__order__item_price_new

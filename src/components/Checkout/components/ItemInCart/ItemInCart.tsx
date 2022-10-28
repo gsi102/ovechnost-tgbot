@@ -17,7 +17,7 @@ const ItemInCart: FC<any> = (props) => {
         {title} - размер {size}
       </h4>
       <p className={styles.checkout__order__item_color}>Цвет: карамель</p>
-      {/* <p>Количество: {quantity}</p> */}
+      <p>Количество: {quantity}</p>
       <p className={styles.checkout__order__item_price}>
         {isDiscount && (
           <>
