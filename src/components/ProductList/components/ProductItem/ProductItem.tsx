@@ -29,7 +29,7 @@ const ProductItem: FC<Props> = (props) => {
   // First letter toUpperCase
   const re = /^.(.*)/gm;
   // @ts-ignore
-  title = title[0].toUpperCase() + re.exec(title)[1];
+  const showTitle = title[0].toUpperCase() + re.exec(title)[1];
   // Split string - product materials, sizes
   const materialArr = material.split(", ");
   const sizesArr = sizes.toUpperCase().split(", ");
@@ -129,7 +129,7 @@ const ProductItem: FC<Props> = (props) => {
         </div>
 
         <div className={styles.productItem__name}>
-          <p>{title}</p>
+          <p>{showTitle}</p>
           <p className={styles.productItem__name_hint}>
             {materialArr.map((el: string) => {
               return (
