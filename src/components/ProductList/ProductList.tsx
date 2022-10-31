@@ -1,10 +1,12 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import ProductItem from "./components/ProductItem/ProductItem";
-import { LANGUAGE, SERVER } from "../../const/const";
+import { LANGUAGE } from "../../const/const";
 import { useTelegram } from "../../hooks/useTelegram";
+import { IItemInCart, IProduct } from "../../types/types";
+import { useNavigate } from "react-router-dom";
+import { getProducts } from "../../api/getProducts";
 
 import styles from "./ProductList.module.scss";
-import { useNavigate } from "react-router-dom";
 
 // const TEMPARRAYLOCAL = [
 //   {
@@ -101,8 +103,8 @@ import { useNavigate } from "react-router-dom";
 // ];
 
 const ProductList: FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
-  const [cart, setCart] = useState<any[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [cart, setCart] = useState<IItemInCart[]>([]);
   const { tg } = useTelegram();
   const navigate = useNavigate();
 
@@ -113,28 +115,16 @@ const ProductList: FC = () => {
 
   useEffect(() => {
     let fetched = false;
-
     if (!fetched) {
-      const request = async () => {
-        await fetch(`${SERVER}/products/`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((res) => {
-            const fetchedProducts = res.data;
-            setProducts(fetchedProducts);
-          });
-      };
       try {
-        request();
+        getProducts().then((res: { data: IProduct[] }) => {
+          const fetchedProducts = res.data;
+          setProducts(fetchedProducts);
+        });
       } catch (e) {
         console.log(e);
       }
     }
-
     return () => {
       fetched = true;
     };
@@ -146,6 +136,7 @@ const ProductList: FC = () => {
 
     tg.MainButton.setParams({
       text: `${LANGUAGE.RU.TOCHECKOUT}: ${priceTotal}${LANGUAGE.RU.CURRENCY}`,
+      color: "rgb(0, 166, 81)",
     });
 
     if (cart.length !== 0 && !tg.MainButton.isVisible) {
@@ -157,7 +148,7 @@ const ProductList: FC = () => {
     }
   }, [cart]);
 
-  const goToCheckout = useCallback((cart: any) => {
+  const goToCheckout = useCallback((cart: IItemInCart[]) => {
     tg.MainButton.hide();
     navigate("/checkout", {
       replace: false,
@@ -173,7 +164,7 @@ const ProductList: FC = () => {
   }, [cart]);
 
   const addToCart = useCallback(
-    (product: any) => {
+    (product: IItemInCart) => {
       const temp = [...cart, product];
       setCart([...temp]);
     },
@@ -204,7 +195,7 @@ const ProductList: FC = () => {
 
       {/* TWO PRODUCTS IN A ROW */}
       <div className={styles.productList__left}>
-        {productsLeft.map((el: any) => {
+        {productsLeft.map((el: IProduct) => {
           return (
             <div key={el._id}>
               <ProductItem product={el} onAdd={addToCart} />
@@ -213,7 +204,7 @@ const ProductList: FC = () => {
         })}
       </div>
       <div className={styles.productList__right}>
-        {productsRight.map((el: any) => {
+        {productsRight.map((el: IProduct) => {
           return (
             <div key={el._id}>
               <ProductItem product={el} onAdd={addToCart} />
@@ -223,7 +214,7 @@ const ProductList: FC = () => {
       </div>
 
       {/* SINGLE PRODUCT IN A ROW */}
-      {/* {products.map((el: any) => {
+      {/* {products.map((el: IProduct) => {
         return (
           <div key={el._id}>
             <ProductItem product={el} onAdd={addToCart} />

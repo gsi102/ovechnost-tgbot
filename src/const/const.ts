@@ -8,6 +8,10 @@ const EN = {
   TOCHECKOUT: "Checkout",
   CHECK_CART:
     "Check items in your cart. If everything is rigth, fill in the form and submit the order.",
+  QUANTITY: "Quantity",
+  COLOR: "Color",
+  SIZE: "Size",
+  REMOVE: "Remove",
   NAME: "Name",
   PHONE: "Phone",
   TOTAL: "Total",
@@ -24,6 +28,10 @@ export const LANGUAGE = {
     TOCHECKOUT: "Оформить заказ",
     CHECK_CART:
       "Проверьте товары в корзине. Если все верно, заполните форму и отправьте заявку.",
+    QUANTITY: "Количество",
+    COLOR: "Цвет",
+    SIZE: "Размер",
+    REMOVE: "Убрать",
     NAME: "Имя",
     PHONE: "Телефон",
     TOTAL: "Итого",

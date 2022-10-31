@@ -1,13 +1,18 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../../UI/Button/Button";
 import { LANGUAGE } from "../../../../const/const";
+import { IItemInCart, IProduct } from "../../../../types/types";
 
 import styles from "./ProductItem.module.scss";
 
-const ProductItem: FC<any> = (props) => {
-  const { product, onAdd } = props;
-  let { title, material, oldPrice, newPrice, colors, sizes } = product;
+interface Props {
+  product: IProduct;
+  onAdd: (el: IItemInCart) => void;
+}
 
+const ProductItem: FC<Props> = (props) => {
+  const { product, onAdd } = props;
+  const { title, material, oldPrice, newPrice, colors, sizes } = product;
   const [choosenSize, setChoosenSize] = useState("");
   const [requiredAlert, setRequiredAlert] = useState("");
   const [btnEffectOnClick, setBtnEffectOnClick] = useState("");
@@ -17,15 +22,17 @@ const ProductItem: FC<any> = (props) => {
   const isChoosen = Boolean(choosenSize !== "");
   const isDiscount = Boolean(oldPrice !== newPrice);
 
-  const discountAmount = Math.round(((oldPrice - newPrice) / oldPrice) * 100);
+  const discountAmount = Math.round(
+    ((+oldPrice - +newPrice) / +oldPrice) * 100
+  );
 
   // First letter toUpperCase
   const re = /^.(.*)/gm;
   // @ts-ignore
   title = title[0].toUpperCase() + re.exec(title)[1];
   // Split string - product materials, sizes
-  material = material.split(", ");
-  sizes = sizes.toUpperCase().split(", ");
+  const materialArr = material.split(", ");
+  const sizesArr = sizes.toUpperCase().split(", ");
 
   const clearSizesStyles = useCallback(() => {
     const tempObj: { [key: string]: string } = {};
@@ -73,7 +80,7 @@ const ProductItem: FC<any> = (props) => {
 
   const addToCart = useCallback(() => {
     if (!isChoosen) {
-      // Show styled notification
+      // Show styled "required" notification
       setRequiredAlert(styles.requiredAlert);
       // Remove it in 3s
       clearTimeout(keepTimeout.current);
@@ -84,7 +91,7 @@ const ProductItem: FC<any> = (props) => {
       setChoosenSize("");
       clearSizesStyles();
       // Cb from parent
-      const addVariant = {
+      const addVariant: IItemInCart = {
         id: `${product.sku}-${choosenSize}`,
         title: product.title,
         sku: product.sku,
@@ -95,7 +102,7 @@ const ProductItem: FC<any> = (props) => {
         quantity: 1,
       };
       onAdd(addVariant);
-      // Button effect on click
+      // Button "click" effect on click
       setBtnEffectOnClick(styles.btnClick);
       clearTimeout(keepTimeout.current);
       keepTimeout.current = setTimeout(() => {
@@ -124,7 +131,7 @@ const ProductItem: FC<any> = (props) => {
         <div className={styles.productItem__name}>
           <p>{title}</p>
           <p className={styles.productItem__name_hint}>
-            {material.map((el: string) => {
+            {materialArr.map((el: string) => {
               return (
                 <span key={el}>
                   <span>{el}</span>
@@ -163,7 +170,7 @@ const ProductItem: FC<any> = (props) => {
         <div className={styles.productItem__color}></div>
 
         <div className={styles.productItem__size}>
-          {sizes.map((el: string) => {
+          {sizesArr.map((el: string) => {
             return (
               <div
                 className={styles.productItem__size__value}

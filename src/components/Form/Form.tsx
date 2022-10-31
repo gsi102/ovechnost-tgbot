@@ -8,12 +8,12 @@ import styles from "./Form.module.scss";
 
 const Form: FC = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState();
-  const [phone, setPhone] = useState();
-  const onNameChange = (e: any) => {
+  const [name, setName] = useState<string>();
+  const [phone, setPhone] = useState<string>();
+  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
-  const onPhoneChange = (e: any) => {
+  const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
   };
 

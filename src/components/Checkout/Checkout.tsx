@@ -1,19 +1,20 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Form from "../Form/Form";
 import ItemInCart from "./components/ItemInCart/ItemInCart";
 import { LANGUAGE } from "../../const/const";
+import { IItemInCart } from "../../types/types";
 
 import styles from "./Checkout.module.scss";
 
 const Checkout: FC = () => {
   const location = useLocation();
   let order = location?.state;
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<IItemInCart[]>([]);
 
-  const groupSimilar = useCallback((arr: any[]) => {
+  const groupSimilar = useCallback((arr: IItemInCart[]) => {
     // let arr = [...order];
-    let filtered: any[] = [];
+    let grouped: IItemInCart[] = [];
     for (let i = 0; i < arr.length; i++) {
       const current = { ...arr[i] };
       for (let j = i + 1; j < arr.length; j++) {
@@ -24,9 +25,9 @@ const Checkout: FC = () => {
           current.quantity++;
         }
       }
-      filtered = [...filtered, { ...current }];
+      grouped = [...grouped, { ...current }];
     }
-    return [...filtered];
+    return [...grouped];
   }, []);
 
   useEffect(() => {
@@ -34,14 +35,30 @@ const Checkout: FC = () => {
     setItems(order);
   }, []);
 
-  const totalAmount = items.reduce(
-    (previous: any, current: any) => +previous + +current.newPrice,
-    0
+  const totalAmount = useMemo(() => {
+    return items.reduce(
+      (previous: number, current: IItemInCart) =>
+        +previous + +current.newPrice * current.quantity,
+      0
+    );
+  }, [items]);
+
+  const changeQty = useCallback(
+    (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
+      const newQty = e.target.value;
+      const newList = items.map((item) => {
+        if (item.id === id) item.quantity = +newQty;
+        return item;
+      });
+
+      setItems(newList);
+    },
+    [items]
   );
 
   const deleteItem = useCallback(
     (itemID: string) => {
-      const updatedOrder = items.filter((el: any) => el.id !== itemID);
+      const updatedOrder = items.filter((el: IItemInCart) => el.id !== itemID);
       setItems(updatedOrder);
     },
     [items]
@@ -55,8 +72,14 @@ const Checkout: FC = () => {
         </p>
       </div>
       <h3>Заказ</h3>
-      {items.map((item: any) => {
-        return <ItemInCart item={item} deleteItem={deleteItem} />;
+      {items.map((item: IItemInCart) => {
+        return (
+          <ItemInCart
+            item={item}
+            changeQty={changeQty}
+            deleteItem={deleteItem}
+          />
+        );
       })}
       <span className={styles.checkout__total}>
         <h3>
