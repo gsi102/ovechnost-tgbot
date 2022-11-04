@@ -6,5 +6,7 @@ export async function getProducts() {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .catch((e) => console.error(e));
 }

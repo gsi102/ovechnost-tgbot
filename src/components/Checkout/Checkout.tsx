@@ -13,7 +13,7 @@ const Checkout: FC = () => {
   const [items, setItems] = useState<IItemInCart[]>([]);
 
   const groupSimilar = useCallback((arr: IItemInCart[]) => {
-    // let arr = [...order];
+    if (!arr) return null;
     let grouped: IItemInCart[] = [];
     for (let i = 0; i < arr.length; i++) {
       const current = { ...arr[i] };
@@ -75,6 +75,7 @@ const Checkout: FC = () => {
       {items.map((item: IItemInCart) => {
         return (
           <ItemInCart
+            key={item.id}
             item={item}
             changeQty={changeQty}
             deleteItem={deleteItem}

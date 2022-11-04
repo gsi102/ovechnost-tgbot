@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../../UI/Button/Button";
-import { LANGUAGE } from "../../../../const/const";
+import { LANGUAGE, SERVER } from "../../../../const/const";
 import { IItemInCart, IProduct } from "../../../../types/types";
 
 import styles from "./ProductItem.module.scss";
@@ -111,6 +111,10 @@ const ProductItem: FC<Props> = (props) => {
     }
   }, [product, choosenSize]);
 
+  // console.log(product.images[0]);
+
+  console.log(`${SERVER}/products/img` + `?path=${product.images[0]}`);
+
   const id = product._id;
   if (id === "delivery") {
     return <div className={styles.productItem}></div>;
@@ -125,7 +129,10 @@ const ProductItem: FC<Props> = (props) => {
               </span>
             </div>
           )}
-          <img src="" alt="product.webp" />
+          <img
+            src={`${SERVER}/products/img/` + `${product.images[0]}`}
+            alt="product.webp"
+          />
         </div>
 
         <div className={styles.productItem__name}>

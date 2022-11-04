@@ -29,9 +29,18 @@
   border-radius: 20px;
   outline: none;
   border: none;
+  -webkit-appearance: none;
   -webkit-box-shadow: 1px 1px 10px rgb(130, 118, 106, 0.2); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow: 1px 1px 10px rgb(130, 118, 106, 0.2); /* Firefox 3.5 - 3.6 */
   box-shadow: 1px 1px 10px rgb(130, 118, 106, 0.2);
+
+  &:focus {
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 5px rgb(130, 118, 106, 1); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 1px 1px 5px rgb(130, 118, 106, 1); /* Firefox 3.5 - 3.6 */
+    box-shadow: 1px 1px 5px rgb(130, 118, 106, 1);
+    outline: none;
+  }
 }
 
 .checkout__order__item_price_new {

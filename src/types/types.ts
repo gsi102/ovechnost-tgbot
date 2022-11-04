@@ -19,4 +19,5 @@ export interface IProduct {
   material: string;
   isInStockColor1: string;
   colors: string;
+  images: string[];
 }

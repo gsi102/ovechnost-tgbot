@@ -34,6 +34,14 @@
   }
 }
 
+.form__input_alert {
+  -webkit-appearance: none;
+  -webkit-box-shadow: 1px 1px 5px rgb(249, 52, 52, 1); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 1px 5px rgb(249, 52, 52, 1); /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 1px 5px rgb(249, 52, 52, 1);
+  outline: none;
+}
+
 .form__submitBtn {
   width: fit-content;
   height: 100%;
